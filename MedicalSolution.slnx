@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="API/API.csproj" />
+  <Project Path="DTO/DTO.csproj" Id="bf427e84-bd93-44c8-bf36-969e23363e51" />
 </Solution>
