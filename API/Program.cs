@@ -9,6 +9,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IPatientManager, PatientManager>();
 builder.Services.AddSingleton<IRHConnector, RHConnector>();
+builder.Services.AddSingleton<IAppointmentManager, AppointmentManager>();
 
 var app = builder.Build();
 

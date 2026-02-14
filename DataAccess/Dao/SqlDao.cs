@@ -4,7 +4,7 @@ namespace DataAccess.Dao
 {
     public class SqlDao
     {
-        private string connectionString = "";
+        private string connectionString = "Server=localhost\\MSSQLSERVER01;Database=MedicalSolutionBD;Trusted_Connection=True;TrustServerCertificate=True;";
         //para conectar con el usuario y la contraseña de la base de datos
 
         private static SqlDao? instance;
