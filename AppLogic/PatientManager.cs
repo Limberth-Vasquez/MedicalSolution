@@ -1,4 +1,5 @@
-﻿using DTO;
+﻿using DataAccess.Crud;
+using DTO;
 
 namespace AppLogic
 {
@@ -12,12 +13,8 @@ namespace AppLogic
     {
         public List<Patient> GetAllPatient()
         {
-            var patients = new List<Patient>();
-            patients.Add(new Patient() { Name = "Erick" });
-            patients.Add(new Patient() { Name = "Bryan" });
-            patients.Add(new Patient() { Name = "David" });
-
-            return patients;
+            var crud = new PatientCrud();
+            return crud.RetrieveAll<Patient>();
         }
         public string GetPatientByDoctor(int pIdDoctor)
         {

@@ -4,31 +4,33 @@ using DTO;
 
 namespace DataAccess.Mappers
 {
-    public class AppointmentMapper : ICrudStatements, IObjectMapper
+    public class PatientMapper : IObjectMapper, ICrudStatements
     {
         public BaseClass BuildObject(Dictionary<string, object> row)
         {
-            throw new NotImplementedException();
+            var paciente = new Patient();
+            paciente.Id = int.Parse(row[key: "Id"].ToString());
+            paciente.SocialSecurityId = row[key: "SocialSecurityId"].ToString();
+            paciente.Name = row[key: "Name"].ToString();
+            paciente.LastName = row[key: "LastName"].ToString();
+            return paciente;
         }
 
         public List<BaseClass> BuildObjects(List<Dictionary<string, object>> rows)
         {
-            throw new NotImplementedException();
+            var results = new List<BaseClass>();
+            foreach (var item in rows)
+            {
+                var row = BuildObject(item);
+                results.Add(row);
+            }
+
+            return results;
         }
 
         public SqlOperation GetCreateStatement(BaseClass dto)
         {
-            var appointment = (Appointment)dto;
-
-            var operation = new SqlOperation();
-            operation.ProcedureName = "SP_INSERT_APPOINTMENT"; // aca va el nombre del SP  creado en la BD
-
-            operation.AddIntParam("patientid", appointment.PatientId);
-            operation.AddDatetimeParam("date", appointment.AppointmentDate);
-            operation.AddVarcharParam("title", appointment.Title);
-            operation.AddVarcharParam("specialty", appointment.Speciality);
-
-            return operation;
+            throw new NotImplementedException();
         }
 
         public SqlOperation GetDeleteStatement(BaseClass dto)
@@ -38,7 +40,9 @@ namespace DataAccess.Mappers
 
         public SqlOperation GetRetrieveAllStatement()
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation();
+            operation.ProcedureName = "SP_GET_PATIENTS";
+            return operation;
         }
 
         public SqlOperation GetRetrieveByIdStatement(int pId)
