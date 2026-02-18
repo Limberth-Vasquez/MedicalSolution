@@ -21,5 +21,12 @@ namespace API.Controllers
         {
             return _appointmentManager.CreateAppointment(dto);
         }
+
+
+        [HttpPost("GetAppointmentByPatientId")]
+        public List<Appointment> GetAppointmentByPatientId(int patientId)
+        {
+            return _appointmentManager.GetAppointmentByPatientId(patientId);
+        }
     }
 }

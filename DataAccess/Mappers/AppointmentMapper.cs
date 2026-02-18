@@ -8,12 +8,25 @@ namespace DataAccess.Mappers
     {
         public BaseClass BuildObject(Dictionary<string, object> row)
         {
-            throw new NotImplementedException();
+            var appointment = new Appointment();
+            appointment.Id = int.Parse(row["Id"].ToString());
+            appointment.PatientId = int.Parse(row["PatientId"].ToString());
+            appointment.Title = row["Title"].ToString();
+            appointment.Speciality = row["Speciality"].ToString();
+            appointment.AppointmentDate = DateTime.Parse(row["Date"].ToString());
+            return appointment; 
         }
 
         public List<BaseClass> BuildObjects(List<Dictionary<string, object>> rows)
         {
-            throw new NotImplementedException();
+            var results = new List<BaseClass>();
+            foreach (var item in rows)
+            {
+                var row = BuildObject(item);
+                results.Add(row);
+            }
+
+            return results;
         }
 
         public SqlOperation GetCreateStatement(BaseClass dto)
@@ -49,6 +62,14 @@ namespace DataAccess.Mappers
         public SqlOperation GetUpdateStatement(BaseClass dto)
         {
             throw new NotImplementedException();
+        }
+
+        public SqlOperation GetRetrieveAllByPatientIdStatement(int patientId) 
+        {
+            var operation = new SqlOperation();
+            operation.ProcedureName = "SP_GET_APPOINTMENTS_BY_PATIENT_ID";
+            operation.AddIntParam("patientid", patientId);
+            return operation;
         }
     }
 }
