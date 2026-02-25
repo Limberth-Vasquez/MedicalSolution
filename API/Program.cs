@@ -11,6 +11,18 @@ builder.Services.AddSingleton<IPatientManager, PatientManager>();
 builder.Services.AddSingleton<IRHConnector, RHConnector>();
 builder.Services.AddSingleton<IAppointmentManager, AppointmentManager>();
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name:"DemoPolicy",
+        policy =>
+        {
+            policy.AllowAnyOrigin(); //mypage.com, www.mypage.com, localhost:3000, etc
+            policy.AllowAnyMethod(); //post, get, put, delete, etc
+            policy.AllowAnyHeader(); //application/json, aplication/xml, etc
+        });
+});
+
 var app = builder.Build();
 
 // Middleware
@@ -34,5 +46,7 @@ else
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors();
 
 app.Run();

@@ -1,10 +1,11 @@
 ﻿using AppLogic;
 using DTO;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [EnableCors("DemoPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class AppointmentController : ControllerBase
@@ -17,16 +18,38 @@ namespace API.Controllers
         }
 
         [HttpPost("CrearCita")]
-        public string CreateAppointment(Appointment dto) 
+        public ApiResponse CreateAppointment(Appointment dto)
         {
-            return _appointmentManager.CreateAppointment(dto);
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = _appointmentManager.CreateAppointment(dto);
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
 
 
         [HttpPost("GetAppointmentByPatientId")]
-        public List<Appointment> GetAppointmentByPatientId(int patientId)
+        public ApiResponse GetAppointmentByPatientId(int patientId)
         {
-            return _appointmentManager.GetAppointmentByPatientId(patientId);
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = _appointmentManager.GetAppointmentByPatientId(patientId);
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
     }
 }

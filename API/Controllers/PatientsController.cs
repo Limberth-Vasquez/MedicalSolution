@@ -1,9 +1,11 @@
 ﻿using AppLogic;
 using DTO;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [EnableCors("DemoPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class PatientsController : ControllerBase
@@ -17,19 +19,52 @@ namespace API.Controllers
 
 
         [HttpGet("Get")]
-        public string GetPatient()
+        public ApiResponse GetPatient()
         {
-            return _patientManager.GetPatient();            
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = _patientManager.GetPatient();
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
         [HttpGet("GetAll")]
-        public List<Patient> GetAllPatient()
+        public ApiResponse GetAllPatient()
         {
-            return _patientManager.GetAllPatient(); 
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = _patientManager.GetAllPatient();
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
         [HttpGet("GetByDoctor")]
-        public string GetPatientByDoctor(int pIdDoctor)
+        public ApiResponse GetPatientByDoctor(int pIdDoctor)
         {
-            return _patientManager.GetPatientByDoctor(pIdDoctor);
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = _patientManager.GetPatientByDoctor(pIdDoctor);
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
     }
 }

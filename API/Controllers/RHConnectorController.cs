@@ -1,9 +1,11 @@
 ﻿using AppLogic;
 using DTO;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [EnableCors("DemoPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class RHConnectorController : ControllerBase

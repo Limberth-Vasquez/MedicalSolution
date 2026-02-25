@@ -1,26 +1,61 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DTO;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [EnableCors("DemoPolicy")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class DoctorsController : ControllerBase
     {
         [HttpGet]
-        public string GetDoctor()
+        public ApiResponse GetDoctor()
         {
-            return "Datos del doctor";
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = "Datos del doctor";
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
         [HttpGet]
-        public string GetAllDoctors()
+        public ApiResponse GetAllDoctors()
         {
-            return "Datos de todos los doctores";
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = "Datos de todos los doctores";
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
         [HttpGet("GetByDoctor")]
-        public string GetDoctorById(int pIdDoctor)
+        public ApiResponse GetDoctorById(int pIdDoctor)
         {
-            return "Datos del doctor by doctor " + pIdDoctor;
+            var response = new ApiResponse();
+            try
+            {
+                response.Data = "Datos del doctor by doctor ";
+                response.Result = "ok";
+            }
+            catch (Exception ex)
+            {
+                response.Result = "error";
+                response.Message = ex.Message;
+            }
+            return response;
         }
     }
 }
