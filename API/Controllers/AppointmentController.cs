@@ -35,7 +35,7 @@ namespace API.Controllers
         }
 
 
-        [HttpPost("GetAppointmentByPatientId")]
+        [HttpGet("GetAppointmentByPatientId")]
         public ApiResponse GetAppointmentByPatientId(int patientId)
         {
             var response = new ApiResponse();
