@@ -10,6 +10,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IPatientManager, PatientManager>();
 builder.Services.AddSingleton<IRHConnector, RHConnector>();
 builder.Services.AddSingleton<IAppointmentManager, AppointmentManager>();
+builder.Services.AddSingleton<IEmailManager, EmailManager>();
 
 
 builder.Services.AddCors(options =>
